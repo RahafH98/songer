@@ -1,9 +1,8 @@
 package com.RahafH98.songer;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Album {
@@ -16,6 +15,9 @@ public class Album {
     private int songCount;
     private int length;
     private String imageUrl;
+
+    @OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
+    private List<Song> songs = new ArrayList<>();
 
     public Album() {
     }
@@ -74,5 +76,13 @@ public class Album {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
     }
 }
